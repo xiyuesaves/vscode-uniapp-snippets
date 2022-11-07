@@ -3,24 +3,13 @@
     "displayName": "uniapp-snippet",
     "description": "uniapp片段提示",
     "version": "0.0.1",
-    "publisher": "dlhtx",
-    "icon": "images/uni.jpg",
+    "publisher": "xiyue",
     "engines": {
         "vscode": "^1.40.0"
     },
     "author": {
-        "email": "949729789@qq.com",
-        "name": "dlhtx",
-        "blog": "http://dlhtx.zicp.vip:9090"
+        "name": "xiyue"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/DLHTX/vscode-uniapp-snippets"
-    },
-    "keywords": [
-        "uniapp",
-        "snippet"
-    ],
     "categories": [
         "Snippets"
     ],
@@ -31,7 +20,7 @@
                 "path": "./snippets/snippets.json"
             },
             {
-                "language": "vue-html",
+                "language": "vue-html,",
                 "path": "./snippets/html.json"
             }
         ]

@@ -2,14 +2,14 @@
     "uniapp-Base64转ArrayBuffer": {
         "prefix": "uni.base64ToArrayBuffer()",
         "body": [
-            "uni.base64ToArrayBuffer(${1:base64})"
+            "uni.base64ToArrayBuffer(${0:base64})"
         ],
         "description": "uniapp-Base64转ArrayBuffer"
     },
     "uniapp-ArrayBuffer转Base64": {
         "prefix": "uni.arrayBufferToBase64()",
         "body": [
-            "uni.arrayBufferToBase64(${1:arrayBuffer})"
+            "uni.arrayBufferToBase64(${0:arrayBuffer})"
         ],
         "description": "uniapp-ArrayBuffer转Base64"
     },
@@ -17,18 +17,17 @@
         "prefix": "uni.request()",
         "body": [
             "uni.request({",
-            "\turl: 'https://www.example.com/request', //仅为示例，并非真实接口地址。",
+            "\turl: '${0:https://www.example.com}', // 请求地址",
             "\tdata: {",
-            "\t\ttext: 'uni.request'",
+            "\t\t${1:name:'user'}",
             "\t},",
             "\theader: {",
-            "\t\t'custom-header': 'hello' //自定义请求头信息",
+            "\t\t'${2:token:'abc'}",
             "\t},",
             "\tsuccess: (res) => {",
-            "\t\tconsole.log(res.data);",
-            "\t\tthis.text = 'request success';",
+            "\t\tconsole.log(res);",
             "\t}",
-            "});$0"
+            "});"
         ],
         "description": "uniapp-发起网络请求"
     },
@@ -39,18 +38,18 @@
             "\tsuccess: (chooseImageRes) => {",
             "\t\tconst tempFilePaths = chooseImageRes.tempFilePaths;",
             "\t\tuni.uploadFile({",
-            "\t\t\turl: 'https://www.example.com/upload', //仅为示例，非真实的接口地址",
-            "\t\t\tfilePath: tempFilePaths[0],",
+            "\t\t\turl: '${0:https://www.example.com/upload}', // 图片上传地址",
+            "\t\t\tfilePath: tempFilePaths[${1:0}],",
             "\t\t\tname: 'file',",
             "\t\t\tformData: {",
-            "\t\t\t\t'user': 'test'",
+            "\t\t\t\t${2:name: 'user'}",
             "\t\t\t},",
             "\t\t\tsuccess: (uploadFileRes) => {",
             "\t\t\t\tconsole.log(uploadFileRes.data);",
             "\t\t\t}",
             "\t\t});",
             "\t}",
-            "});$0"
+            "});"
         ],
         "description": "uniapp-选择图片"
     },
@@ -58,16 +57,16 @@
         "prefix": "uni.uploadFile()",
         "body": [
             "uni.uploadFile({",
-            "\turl: 'https://www.example.com/upload', //仅为示例，非真实的接口地址",
+            "\turl: '${0:https://www.example.com/upload}', // 文件上传地址",
             "\tfilePath: tempFilePaths[0],",
             "\tname: 'file',",
             "\tformData: {",
-            "\t\t'user': 'test'",
+            "\t\t${1:name: 'user'}",
             "\t},",
             "\tsuccess: (uploadFileRes) => {",
             "\t\tconsole.log(uploadFileRes.data);",
             "\t}",
-            "});$0"
+            "});"
         ],
         "description": "uniapp-上传文件"
     },
@@ -75,35 +74,21 @@
         "prefix": "uni.downloadFile()",
         "body": [
             "uni.downloadFile({",
-            "\turl: 'https://www.example.com/file/test', //仅为示例，并非真实的资源",
+            "\turl: '${0:https://www.example.com/file/test}', // 下载地址",
             "\tsuccess: (res) => {",
             "\t\tif (res.statusCode === 200) {",
             "\t\t\tconsole.log('下载成功');",
             "\t\t}",
             "\t}",
-            "});$0"
+            "});"
         ],
         "description": "uniapp-下载文件"
     },
     "uniapp-创建一个 WebSocket 连接": {
         "prefix": "uni.connectSocket()",
         "body": [
-            "uni.downloadFile({",
-            "\turl: 'https://www.example.com/file/test', //仅为示例，并非真实的资源",
-            "\tsuccess: (res) => {",
-            "\t\tif (res.statusCode === 200) {",
-            "\t\t\tconsole.log('下载成功');",
-            "\t\t}",
-            "\t}",
-            "});$0"
-        ],
-        "description": "uniapp-创建一个 WebSocket 连接"
-    },
-    "uniapp-创建一个 WebSocket 连接": {
-        "prefix": "uni.connectSocket()",
-        "body": [
             "uni.connectSocket({",
-            "\turl: 'wss://www.example.com/socket',",
+            "\turl: '${0:wss://www.example.com/socket}', // ws 地址",
             "\tdata() {",
             "\t\treturn {",
             "\t\t\tx: '',",
@@ -115,7 +100,7 @@
             "\t},",
             "\tprotocols: ['protocol1'],",
             "\tmethod: 'GET'",
-            "});$0"
+            "});"
         ],
         "description": "uniapp-创建一个 WebSocket 连接"
     },
@@ -123,8 +108,8 @@
         "prefix": "uni.onSocketOpen()",
         "body": [
             "uni.onSocketOpen(function (res) {",
-            "\tconsole.log('WebSocket连接已打开！');",
-            "});$0"
+            "\tconsole.log('WebSocket连接已打开！');\n\t$0",
+            "});"
         ],
         "description": "uniapp-监听WebSocket连接打开事件"
     },
@@ -132,8 +117,8 @@
         "prefix": "uni.onSocketError()",
         "body": [
             "uni.onSocketError(function (res) {",
-            "\tconsole.log('WebSocket连接已打开！');",
-            "});$0"
+            "\tconsole.log('WebSocket连接出错！');\n\t$0",
+            "});"
         ],
         "description": "uniapp-监听WebSocket错误"
     },
@@ -141,8 +126,8 @@
         "prefix": "uni.onSocketMessage()",
         "body": [
             "uni.onSocketMessage(function (res) {",
-            "\tconsole.log('收到服务器内容：' + res.data);",
-            "});$0"
+            "\tconsole.log('收到服务器内容：' + res.data);\n\t$0",
+            "});"
         ],
         "description": "uniapp-监听WebSocket接受到服务器的消息事件"
     },
@@ -150,7 +135,7 @@
         "prefix": "uni.sendSocketMessage()",
         "body": [
             "uni.sendSocketMessage({",
-            "\tdata: msg$0",
+            "\tdata: ${0:msg}",
             "});"
         ],
         "description": "uniapp-WebSocket发送数据"
@@ -166,8 +151,8 @@
         "prefix": "uni.onSocketClose()",
         "body": [
             "uni.onSocketClose(function (res) {",
-                "\tconsole.log('WebSocket 已关闭！');",
-            "});$0"
+                "\tconsole.log('WebSocket 已关闭！');\n\t$0",
+            "});"
         ],
         "description": "uniapp-监听WebSocket关闭"
     },
@@ -175,8 +160,8 @@
         "prefix": "uni.navigateTo()",
         "body": [
             "uni.navigateTo({",
-                "\t url: 'test?id=1&name=uniapp$0';",
-            "});$0"
+                "\turl: '${0:test?id=1&name=uniapp}'",
+            "});"
         ],
         "description": "uniapp-跳转到应用内的某个页面"
     },
@@ -184,8 +169,8 @@
         "prefix": "uni.redirectTo()",
         "body": [
             "uni.redirectTo({",
-                "\t url: 'test?id=1&name=uniapp$0';",
-            "});$0"
+                "\turl: '${0:test?id=1&name=uniapp}'",
+            "});"
         ],
         "description": "uniapp-关闭当前页面跳转到应用内的某个页面"
     },
@@ -193,8 +178,8 @@
         "prefix": "uni.reLaunch()",
         "body": [
             "uni.reLaunch({",
-                "\t url: 'test?id=1&name=uniapp$0';",
-            "});$0"
+                "\turl: '${0:test?id=1&name=uniapp}'",
+            "});"
         ],
         "description": "uniapp-关闭所有页面，打开到应用内的某个页面"
     },
@@ -202,7 +187,7 @@
         "prefix": "uni.switchTab()",
         "body": [
             "uni.switchTab({",
-                "\t url: '/pages/index/index$0';",
+                "\turl: '${0:/pages/index/index}';",
             "});$0"
         ],
         "description": "uniapp-跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面"
@@ -211,16 +196,7 @@
         "prefix": "uni.navigateBack()",
         "body": [
             "uni.navigateBack({",
-                "\t delta: 2$0",
-            "});"
-        ],
-        "description": "uniapp-关闭当前页面，返回上一页面或多级页面"
-    },
-    "uniapp-关闭当前页面，返回上一页面或多级页面": {
-        "prefix": "uni.navigateBack()",
-        "body": [
-            "uni.navigateBack({",
-                "\t delta: 2$0",
+                "\tdelta: ${0:1}",
             "});"
         ],
         "description": "uniapp-关闭当前页面，返回上一页面或多级页面"
@@ -229,10 +205,10 @@
         "prefix": "uni.setStorage()",
         "body": [
             "uni.setStorage({",
-                "\tkey: 'storage_key',",
-                "\tdata: 'hello',",
+                "\tkey: '${0:storage_key}',",
+                "\tdata: '${1:hello}',",
                 "\tsuccess: function () {",
-                    "\t\tconsole.log('success')$0;",
+                    "\t\tconsole.log('success')\n\t\t$0;",
                 "\t}",
             "});"
         ],
@@ -241,7 +217,7 @@
     "uniapp-将 data 存储在本地缓存中指定的 key 中,同步接口": {
         "prefix": "uni.setStorageSync()",
         "body": [
-            "uni.setStorageSync('$0storage_key', '$1hello')"
+            "uni.setStorageSync('${0:storage_key}', '${1:hello}')"
         ],
         "description": "uniapp-将 data 存储在本地缓存中指定的 key 中"
     },
@@ -249,9 +225,9 @@
         "prefix": "uni.getStorage()",
         "body": [
             "uni.getStorage({",
-                "\tkey: 'storage_key',",
+                "\tkey: '${0:storage_key}',",
                 "\tsuccess: function (res) {",
-                    "\t\tconsole.log(res.data)$0;",
+                    "\t\tconsole.log(res)\n\t\t$1;",
                 "\t}",
             "});"
         ],
@@ -260,7 +236,7 @@
     "uniapp-从本地缓存中同步获取指定 key 对应的内容": {
         "prefix": "uni.getStorageSync()",
         "body": [
-            "uni.getStorageSync('storage_key$0')"
+            "uni.getStorageSync('${0:storage_key}')"
         ],
         "description": "uniapp-从本地缓存中同步获取指定 key 对应的内容"
     },
@@ -272,6 +248,7 @@
                     "\tconsole.log(res.keys);",
                     "\tconsole.log(res.currentSize);",
                     "\tconsole.log(res.limitSize);",
+                    "\t$0",
                 "\t}",
             "});"
         ],
@@ -325,6 +302,7 @@
                 "\tsuccess: function (res) {",
                     "\t\tconsole.log('当前位置的经度：' + res.longitude);",
                     "\t\tconsole.log('当前位置的纬度：' + res.latitude);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -339,6 +317,7 @@
                     "\t\tconsole.log('详细地址：' + res.address);",
                     "\t\tconsole.log('纬度：' + res.latitude);",
                     "\t\tconsole.log('经度：' + res.longitude);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -357,6 +336,7 @@
                         "\t\t\tlongitude: longitude,",
                         "\t\t\tsuccess: function () {",
                             "\t\t\t\tconsole.log('success');",
+                            "\t\t\t\t$0",
                         "\t\t\t}",
                     "\t\t});",
                 "\t}",
@@ -373,6 +353,7 @@
                     "\t\titemList: ['发送给朋友', '保存图片', '收藏'],",
                     "\t\tsuccess: function(data) {",
                         "\t\t\tconsole.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');",
+                        "\t\t\t$0",
                     "\t\t},",
                     "\t\tfail: function(err) {",
                         "\t\t\tconsole.log(err.errMsg);",
@@ -390,6 +371,7 @@
                 "\tsuccess: function (image) {",
                     "\t\tconsole.log(image.width);",
                     "\t\tconsole.log(image.height);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -402,6 +384,7 @@
                 "\tfilePath: res.tempFilePaths[0],",
                 "\tsuccess: function () {",
                     "\t\tconsole.log('save success');",
+                    "\t\t$0",
                 "\t}",
             "});$0"
         ],
@@ -412,9 +395,10 @@
         "body": [
             "uni.compressImage({",
                 "\tsrc: '/static/logo.jpg',",
-                "\tquality: 80,",
+                "\tquality: ${0:80}, // 图片质量 0-100",
                 "\tsuccess: res => {",
                     "\t\tconsole.log(res.tempFilePath)",
+                    "\t\t$1",
                 "\t}",
             "});"
         ],
@@ -423,15 +407,14 @@
     "uniapp-获取全局唯一的录音管理器 recorderManager": {
         "prefix": "uni.getRecorderManager()",
         "body": [
-            "const recorderManager = uni.getRecorderManager();//其他详细请查看官方文档https://uniapp.dcloud.io/api/media/record-manager"
-         
+            "const recorderManager = uni.getRecorderManager(); // 其他详细请查看官方文档 https://uniapp.dcloud.io/api/media/record-manager"
         ],
         "description": "uniapp-获取全局唯一的录音管理器 recorderManager"
     },
     "uniapp-获取全局唯一的背景音频管理器 backgroundAudioManager": {
         "prefix": "uni.getBackgroundAudioManager()",
         "body": [
-            "uni.getBackgroundAudioManager();//其他详细请查看官方文档https://uniapp.dcloud.io/api/media/background-audio-manager$0"
+            "uni.getBackgroundAudioManager(); // 其他详细请查看官方文档 https://uniapp.dcloud.io/api/media/background-audio-manager$0"
         ],
         "description": "uniapp-获取全局唯一的背景音频管理器 backgroundAudioManager"
     },
@@ -440,7 +423,7 @@
         "body": [
             "const innerAudioContext = uni.createInnerAudioContext();",
             "innerAudioContext.autoplay = true;",
-            "innerAudioContext.src = 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/audio/music.mp3';",
+            "innerAudioContext.src = '${0:https://img-cdn-qiniu.dcloud.net.cn/uniapp/audio/music.mp3}';",
             "innerAudioContext.onPlay(() => {",
                 "\tconsole.log('开始播放');",
             "});",
@@ -459,6 +442,7 @@
                 "\tsourceType: ['camera', 'album'],",
                 "\tsuccess: function (res) {",
                     "\t\tself.src = res.tempFilePath;",
+                    "\t\t$0",
                 "\t}",
             "});$0"
         ],
@@ -471,6 +455,7 @@
                 "\tfilePath: res.tempFilePath,",
                 "\tsuccess: function () {",
                     "\t\tconsole.log('save success');",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -479,28 +464,28 @@
     "uniapp-创建并返回 video 上下文 videoContext 对象": {
         "prefix": "uni.createVideoContext(videoId, this)",
         "body": [
-            "this.videoContext = uni.createVideoContext('myVideo')//更多请查找官方文档https://uniapp.dcloud.io/api/media/video-context"
+            "this.videoContext = uni.createVideoContext('myVideo') // 更多请查找官方文档https://uniapp.dcloud.io/api/media/video-context"
         ],
         "description": "uniapp-创建并返回 video 上下文 videoContext 对象"
     },
     "uniapp-创建并返回 camera 组件的上下文 cameraContext 对象": {
         "prefix": "uni.createCameraContext()",
         "body": [
-            "uni.createCameraContext()//更多请查找官方文档https://uniapp.dcloud.io/api/media/camera-context"
+            "uni.createCameraContext() // 更多请查找官方文档https://uniapp.dcloud.io/api/media/camera-context"
         ],
         "description": "uniapp-创建并返回 camera 组件的上下文 cameraContext 对象"
     },
     "uniapp-": {
         "prefix": "uni.createLivePlayerContext(livePlayerId, this)",
         "body": [
-            "uni.createLivePlayerContext(livePlayerId, this)//更多请查找官方文档https://uniapp.dcloud.io/api/media/live-player-context?id=createliveplayercontext"
+            "uni.createLivePlayerContext(livePlayerId, this) // 更多请查找官方文档https://uniapp.dcloud.io/api/media/live-player-context?id=createliveplayercontext"
         ],
         "description": "uniapp-"
     },
     "uniapp-创建 live-pusher 上下文 livePusherContext 对象": {
         "prefix": "uni.createLivePusherContext(livePusherId, this)",
         "body": [
-            "uni.createLivePusherContext(livePusherId, this)//更多请查找官方文档https://uniapp.dcloud.io/api/media/live-player-context?id=createliveplayercontext"
+            "uni.createLivePusherContext(livePusherId, this) // 更多请查找官方文档https://uniapp.dcloud.io/api/media/live-player-context?id=createliveplayercontext"
         ],
         "description": "uniapp-创建 live-pusher 上下文 livePusherContext 对象"
     },
@@ -516,6 +501,7 @@
                     "\t\tconsole.log(res.language);",
                     "\t\tconsole.log(res.version);",
                     "\t\tconsole.log(res.platform);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -553,6 +539,7 @@
         "body": [
             "uni.onMemoryWarning(function (){",
                 "\tconsole.log('onMemoryWarningReceive')$0",
+                "\t$0",
             "});"
         ],
         "description": "uniapp-监听内存不足告警事件"
@@ -562,7 +549,8 @@
         "body": [
             "uni.getNetworkType({",
                 "\tsuccess: function (res) {",
-                    "\t\tconsole.log(res.networkType);$0",
+                    "\t\tconsole.log(res.networkType);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -573,7 +561,8 @@
         "body": [
             "uni.onNetworkStatusChange(function (res) {",
                 "\tconsole.log(res.isConnected);",
-                "\tconsole.log(res.networkType);$0",
+                "\tconsole.log(res.networkType);",
+                "\t$0",
             "});"
         ],
         "description": "uniapp-"
@@ -585,6 +574,7 @@
                 "\tconsole.log(res.x);",
                 "\tconsole.log(res.y);",
                 "\tconsole.log(res.z);",
+                "\t$0",
             "});"
         ],
         "description": "uniapp-监听加速度数据"
@@ -607,29 +597,30 @@
         "prefix": "uni.onCompassChange(CALLBACK)",
         "body": [
             "uni.onCompassChange(function (res) {",
-                "\tconsole.log(res.direction);$0",
-            "});//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
+                "\tconsole.log(res.direction);",
+                "\t$0",
+            "}); // 更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
         ],
         "description": "uniapp-监听罗盘数据"
     },
     "uniapp-开始监听罗盘数据": {
         "prefix": "uni.startCompass(OBJECT)",
         "body": [
-            "uni.startCompass()//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
+            "uni.startCompass() // 更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
         ],
         "description": "uniapp-开始监听罗盘数据"
     },
     "uniapp-停止监听罗盘数据": {
         "prefix": "uni.stopCompass()",
         "body": [
-            "uni.stopCompass()//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
+            "uni.stopCompass() // 更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
         ],
         "description": "uniapp-停止监听罗盘数据"
     },
     "uniapp-监听陀螺仪数据变化事件": {
         "prefix": "uni.onGyroscopeChange()",
         "body": [
-            "uni.onGyroscopeChange(CALLBACK)//更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
+            "uni.onGyroscopeChange(CALLBACK) // 更多关于设备api请访问官方文档https://uniapp.dcloud.io/api/system/gyroscope?id=ongyroscopechange"
         ],
         "description": "uniapp-监听陀螺仪数据变化事件"
     },
@@ -638,6 +629,7 @@
         "body": [
             "uni.showToast({",
                 "\ttitle: '标题',",
+                "\ticon: 'none'",
                 "\tduration: 2000",
             "});"
         ],
@@ -655,6 +647,7 @@
         "body": [
             "uni.showLoading({",
                 "\ttitle: '加载中'$0",
+                "\ticon: 'none'",
             "});"
         ],
         "description": "uniapp-显示 loading 提示框"
@@ -670,13 +663,15 @@
         "prefix": "uni.showModal()",
         "body": [
             "uni.showModal({",
-                "\ttitle: '提示',",
-                "\tcontent: '这是一个模态弹窗',",
+                "\ttitle: '${0:提示}',",
+                "\tcontent: '${1:这是一个模态弹窗}',",
                 "\tsuccess: function (res) {",
                     "\t\tif (res.confirm) {",
                         "\t\t\tconsole.log('用户点击确定');",
+                        "\t\t\t$2",
                     "\t\t} else if (res.cancel) {",
                         "\t\t\tconsole.log('用户点击取消');",
+                        "\t\t\t$3",
                     "\t\t}",
                 "\t}",
             "});"
@@ -687,12 +682,14 @@
         "prefix": "uni.showActionSheet()",
         "body": [
             "uni.showActionSheet({",
-                "\titemList: ['A', 'B', 'C'],",
+                "\titemList: ['${0:A}', '${1:B}', '${2:C}'],",
                 "\tsuccess: function (res) {",
                     "\t\tconsole.log('选中了第' + (res.tapIndex + 1) + '个按钮');",
+                    "\t\t$3",
                 "\t},",
                 "\tfail: function (res) {",
                     "\t\tconsole.log(res.errMsg);",
+                    "\t\t$4",
                 "\t}",
             "});"
         ],
@@ -702,7 +699,7 @@
         "prefix": "uni.setNavigationBarTitle()",
         "body": [
             "uni.setNavigationBarTitle({",
-                "\ttitle: '新的标题'$0",
+                "\ttitle: '${0:新的标题}'",
             "});"
         ],
         "description": "uniapp-动态设置当前页面的标题"
@@ -712,8 +709,8 @@
         "prefix": "uni.setNavigationBarColor()",
         "body": [
             "uni.setNavigationBarColor({",
-                "\tfrontColor: '#ffffff',",
-                "\tbackgroundColor: '#ff0000',",
+                "\tfrontColor: '${0:#ffffff}',",
+                "\tbackgroundColor: '${1:#ff0000}',",
                 "\tanimation: {",
                     "\t\tduration: 400,",
                     "\t\ttimingFunc: 'easeIn'",
@@ -740,10 +737,10 @@
         "prefix": "uni.setTabBarItem()",
         "body": [
             "uni.setTabBarItem({",
-                "\tindex: 0,",
-                "\ttext: 'text',",
-                "\ticonPath: '/path/to/iconPath',",
-                "\tselectedIconPath: '/path/to/selectedIconPath'",
+                "\tindex: $0,",
+                "\ttext: '${1:名称}',",
+                "\ticonPath: '${3:/path/to/iconPath}',",
+                "\tselectedIconPath: '${4:/path/to/selectedIconPath}'",
             "});"
         ],
         "description": "uniapp-动态设置 tabBar 某一项的内容"
@@ -752,10 +749,10 @@
         "prefix": "uni.setTabBarStyle()",
         "body": [
             "uni.setTabBarStyle({",
-                "\tcolor: '#FF0000',",
-                "\tselectedColor: '#00FF00',",
-                "\tbackgroundColor: '#0000FF',",
-                "\tborderStyle: 'white'",
+                "\tcolor: '${0:#FF0000}',",
+                "\tselectedColor: '${1:#00FF00}',",
+                "\tbackgroundColor: '${2:0000FF}',",
+                "\tborderStyle: '${3:white}'",
             "});"
         ],
         "description": "uniapp-动态设置 tabBar 的整体样式"
@@ -778,8 +775,8 @@
         "prefix": "uni.setTabBarBadge()",
         "body": [
             "uni.setTabBarBadge({",
-                "index: 0,",
-                "text: '1'",
+                "index: ${0:0},",
+                "text: '${1:99}'",
             "});"
         ],
         "description": "uniapp-为 tabBar 某一项的右上角添加文本"
@@ -788,7 +785,7 @@
         "prefix": "uni.removeTabBarBadge()",
         "body": [
             "uni.removeTabBarBadge({",
-                "index: 0,",
+                "index: ${0:0},",
             "});"
         ],
         "description": "uniapp-移除 tabBar 某一项右上角的文本"
@@ -797,7 +794,7 @@
         "prefix": "uni.showTabBarRedDot(OBJECT)",
         "body": [
             "uni.showTabBarRedDot({",
-                "index: 0,",
+                "index: ${0:0},",
             "});"
         ],
         "description": "uniapp-显示 tabBar 某一项的右上角的红点"
@@ -806,7 +803,7 @@
         "prefix": "uni.hideTabBarRedDot(OBJECT)",
         "body": [
             "uni.hideTabBarRedDot({",
-                "index: 0,",
+                "index: ${0:0},",
             "});"
         ],
         "description": "uniapp-隐藏 tabBar 某一项的右上角的红点"
@@ -815,9 +812,9 @@
         "prefix": "uni.setBackgroundColor()",
         "body": [
             "uni.setBackgroundColor({",
-                "\tbackgroundColor: '#ffffff'$0",
-                "\backgroundColorTop: '#ffffff'",
-                "\backgroundColorBottom: '#ffffff'",
+                "\tbackgroundColor: '${0:#000000}'",
+                "\backgroundColorTop: '${1:#ffffff}'",
+                "\backgroundColorBottom: '${2:#ffffff}'",
             "});"
         ],
         "description": "uniapp-动态设置窗口的背景色"
@@ -826,7 +823,8 @@
         "prefix": "uni.setBackgroundTextStyle()",
         "body": [
             "uni.setBackgroundTextStyle({",
-                "\ttextStyle: 'dark' // 下拉背景字体、loading 图的样式为dark$0",
+                "\ttextStyle: 'dark' // 下拉背景字体、loading 图的样式为dark",
+                "\t$0",
             "});"
         ],
         "description": "uniapp-动态设置下拉背景字体、loading 图的样式"
@@ -835,11 +833,11 @@
         "prefix": "uni.createAnimation()",
         "body": [
             "var animation = uni.createAnimation({",
-                "\ttransformOrigin: '50% 50%',",
-                "\tduration: 1000,",
-                "\ttimingFunction: 'ease',",
-                "\tdelay: 0",
-            "})//官方文档https://uniapp.dcloud.io/api/ui/animation?id=createanimation"
+                "\ttransformOrigin: '${0:50% 50%}',",
+                "\tduration: ${1:1000},",
+                "\ttimingFunction: '${2:ease}',",
+                "\tdelay: ${3:ease}",
+            "}) // 官方文档https://uniapp.dcloud.io/api/ui/animation?id=createanimation"
         ],
         "description": "uniapp-创建一个动画实例 animation"
     },
@@ -847,8 +845,8 @@
         "prefix": "uni.pageScrollTo()",
         "body": [
             "uni.pageScrollTo({",
-                "\tscrollTop: 0,",
-                "\tduration: 300",
+                "\tscrollTop: ${0:0},",
+                "\tduration: ${1:300}",
             "});"
         ],
         "description": "uniapp-将页面滚动到目标位置"
@@ -860,6 +858,7 @@
             "uni.onWindowResize((res) => {",
                 "\tconsole.log('变化后的窗口宽度=' + res.size.windowWidth)",
                 "\tconsole.log('变化后的窗口高度=' + res.size.windowHeight)",
+                "\t$0",
             "})"
         ],
         "description": "uniapp-监听窗口尺寸变化事件"
@@ -868,7 +867,7 @@
         "prefix": "uni.offWindowResize()",
         "body": [
             "uni.offWindowResize(() => {",
-                "\tconsole.log('取消监听窗口尺寸变化事件')$0",
+                "\tconsole.log('取消监听窗口尺寸变化事件')\n\t$0",
             "});"
         ],
         "description": "uniapp-取消监听窗口尺寸变化事件"
@@ -877,8 +876,8 @@
         "prefix": "uni.loadFontFace()",
         "body": [
             "uni.loadFontFace({",
-                "\tfamily: 'Bitstream Vera Serif Bold',",
-                "\tsource: 'url()',",
+                "\tfamily: '${0:Bitstream Vera Serif Bold}',",
+                "\tsource: 'url($1)',",
                 "\tsuccess() {",
                     "\t\tconsole.log('success')",
                 "\t}",
@@ -889,7 +888,7 @@
     "uniapp-函数用于获取当前页面栈的实例": {
         "prefix": "getCurrentPages()",
         "body": [
-            "getCurrentPages()//关于获取页面的官方文档https://uniapp.dcloud.io/api/window/window"
+            "getCurrentPages() // 关于获取页面的官方文档https://uniapp.dcloud.io/api/window/window"
         ],
         "description": "uniapp-函数用于获取当前页面栈的实例"
     },
@@ -897,9 +896,9 @@
         "prefix": "uni.saveFile()",
         "body": [
             "uni.saveFile({",
-                "\ttempFilePath: tempFilePaths[0],",
+                "\ttempFilePath: ${0:tempFilePaths[0]},",
                 "\tsuccess: function (res) {",
-                   "\t\tvar savedFilePath = res.savedFilePath;",
+                   "\t\tlet savedFilePath = res.savedFilePath;",
                 "\t}",
             "});"
         ],
@@ -911,6 +910,7 @@
             "uni.getSavedFileList({",
                 "\tsuccess: function (res) {",
                     "\t\tconsole.log(res.fileList);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -920,10 +920,11 @@
         "prefix": "uni.getSavedFileInfo()",
         "body": [
             "uni.getSavedFileInfo({",
-                "\tfilePath: 'unifile://somefile', //仅做示例用，非真正的文件路径",
+                "\tfilePath: '${0:unifile://somefile}', // 本地文件路径",
                 "\tsuccess: function (res) {",
                     "\t\tconsole.log(res.size);",
                     "\t\tconsole.log(res.createTime);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -933,9 +934,10 @@
         "prefix": "uni.removeSavedFile()",
         "body": [
             "uni.removeSavedFile({",
-                "\tfilePath: res.fileList[0].filePath,",
+                "\tfilePath: ${0:res.fileList[0].filePath},",
                 "\tcomplete: function (res) {",
                     "\t\tconsole.log(res);",
+                    "\t\t$0",
                 "\t}",
             "});"
         ],
@@ -944,8 +946,8 @@
     "uniapp-获取文件信息": {
         "prefix": "uni.getFileInfo()",
         "body": [
-            "uni.uni.getFileInfo({",
-                "\tfilePath: res.fileList[0].filePath,",
+            "uni.getFileInfo({",
+                "\tfilePath: ${0:res.fileList[0].filePath},",
             "});"
         ],
         "description": "uniapp-获取文件信息"
@@ -957,6 +959,7 @@
                 "\tfilePath: filePath,",
                 "\tsuccess: function (res) {",
                     "\t\tconsole.log('打开文档成功');",
+                    "\t\t$0",
                 "\t})",
             "});"
         ],

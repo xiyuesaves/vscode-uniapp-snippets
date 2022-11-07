@@ -1,7 +1,7 @@
 {
     "view": {
         "prefix": "view",
-        "body": "<view>$2</view>$3",
+        "body": "<view>$0</view>$1",
         "description": "视图容器"
     },
     "scroll-view": {
@@ -16,7 +16,7 @@
             "\t<swiper-item>",
             "\t\t<view class=\"swiper-item uni-bg-red\">A</view>",
             "\t</swiper-item>",
-            "\t\t</swiper>"
+            "</swiper>"
         ],
         "description": "滑块视图容器"
     },
@@ -32,8 +32,7 @@
     "movable-view": {
         "prefix": "movable-view",
         "body": [
-            "<movable-view :x=\"$1x\" :y=\"$2y\" direction=\"all\" @change=\"$3onChange\">text</movable-view>",
-        
+            "<movable-view :x=\"$1x\" :y=\"$2y\" direction=\"all\" @change=\"$3onChange\">text</movable-view>"
         ],
         "description": "可移动的视图容器"
     },
