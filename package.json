@@ -2,7 +2,7 @@
     "name": "uniapp-snippet",
     "displayName": "uniapp-snippet",
     "description": "uniapp片段提示",
-    "version": "0.2.0",
+    "version": "0.2.3",
     "publisher": "xiyue",
     "engines": {
         "vscode": "^1.40.0"
