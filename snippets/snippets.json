@@ -658,8 +658,8 @@
         "prefix": "uni.showLoading()",
         "body": [
             "uni.showLoading({",
-                "\ttitle: '${1:加载中}'",
-                "\ticon: 'none'",
+                "\ttitle: '${1:加载中}',",
+                "\tmask: ${2:true}",
             "});$0"
         ],
         "description": "uni-显示 loading 提示框"
